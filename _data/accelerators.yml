@@ -1,0 +1,176 @@
+- name: General
+  comparisons:
+  - label: Release Year
+    frameworks:
+      tpuv3: "2018"
+      tpuv4: "2021"
+      tpuv5e: "2023"
+      tpuv5p: "2023"
+      tpuv6e: "2024"
+      tpu7x: "2025"
+      v100: "2017"
+      a100: "2020"
+      h100: "2022"
+      h200: "2023"
+      b200: "2024"
+      gb200: "2024"
+  - label: Architecture
+    frameworks:
+      tpuv3: "MXU"
+      tpuv4: "MXU"
+      tpuv5e: "TensorCore"
+      tpuv5p: "TensorCore"
+      tpuv6e: "Trillium"
+      tpu7x: "Ironwood"
+      v100: "Volta"
+      a100: "Ampere"
+      h100: "Hopper"
+      h200: "Hopper"
+      b200: "Blackwell"
+      gb200: "Blackwell"
+
+- name: Memory
+  comparisons:
+  - label: HBM Capacity
+    frameworks:
+      tpuv3: "32 GB"
+      tpuv4: "32 GB"
+      tpuv5e: "16 GB"
+      tpuv5p: "95 GB"
+      tpuv6e: "32 GB"
+      tpu7x: "192 GB"
+      v100: "32 GB"
+      a100: "80 GB"
+      h100: "80 GB"
+      h200: "141 GB"
+      b200: "192 GB"
+      gb200: "192 GB (per GPU)"
+  - label: HBM Bandwidth
+    frameworks:
+      tpuv3: "900 GB/s"
+      tpuv4: "1200 GB/s"
+      tpuv5e: "819 GB/s"
+      tpuv5p: "2765 GB/s"
+      tpuv6e: "1638 GB/s"
+      tpu7x: "7380 GB/s"
+      v100: "900 GB/s"
+      a100: "2039 GB/s"
+      h100: "3350 GB/s"
+      h200: "4800 GB/s"
+      b200: "8000 GB/s"
+      gb200: "8000 GB/s"
+  - label: VMEM Capacity
+    frameworks:
+      tpuv3: "16 MiB (per core)"
+      tpuv4: "16 MiB (per core)"
+      tpuv5e: "128 MiB"
+      tpuv5p: ""
+      tpuv6e: ""
+      tpu7x: ""
+      v100: "6 MiB (L2)"
+      a100: "40 MiB (L2)"
+      h100: "50 MiB (L2)"
+      h200: "60 MiB (L2)"
+      b200: ""
+      gb200: ""
+    remarks: |
+      - **TPU VMEM**: On-chip Vector Memory (SRAM) local to each TensorCore. Values are per-core unless shared.
+      - **GPU L2**: For GPUs, the L2 cache is the closest architectural equivalent to the TPU's on-chip scratchpad memory.
+
+- name: Compute (Peak)
+  comparisons:
+  - label: BF16 / FP16 TFLOPS
+    frameworks:
+      tpuv3: "123"
+      tpuv4: "275"
+      tpuv5e: "197"
+      tpuv5p: "459"
+      tpuv6e: "918"
+      tpu7x: "2307"
+      v100: "125"
+      a100: "312"
+      h100: "1979"
+      h200: "1979"
+      b200: "2250"
+      gb200: "2500"
+    remarks: |
+      - **TPU7x/Ironwood**: First dual-chiplet architecture, exposing 2 devices per chip.
+      - **Nvidia Tensor Cores**: Figures are for Tensor Core performance (with sparsity where applicable for newer gens).
+  - label: FP8 TFLOPS
+    frameworks:
+      tpuv3: ""
+      tpuv4: ""
+      tpuv5e: "197"
+      tpuv5p: "459"
+      tpuv6e: "918"
+      tpu7x: "4614"
+      v100: ""
+      a100: ""
+      h100: "3958"
+      h200: "3958"
+      b200: "4500"
+      gb200: "5000"
+  - label: INT8 TFLOPS
+    frameworks:
+      tpuv3: ""
+      tpuv4: "275"
+      tpuv5e: "393"
+      tpuv5p: "918"
+      tpuv6e: "1836"
+      tpu7x: ""
+      v100: "62"
+      a100: "624"
+      h100: "3958"
+      h200: "3958"
+      b200: "4500"
+      gb200: "5000"
+  - label: FP4 TFLOPS
+    frameworks:
+      tpuv3: ""
+      tpuv4: ""
+      tpuv5e: ""
+      tpuv5p: ""
+      tpuv6e: ""
+      tpu7x: ""
+      v100: ""
+      a100: ""
+      h100: ""
+      h200: ""
+      b200: "9000"
+      gb200: "10000"
+
+- name: Interconnect & Scale
+  comparisons:
+  - label: ICI Bandwidth (Per Chip)
+    frameworks:
+      tpuv3: "656 GB/s"
+      tpuv4: "300 GB/s"
+      tpuv5e: "200 GB/s"
+      tpuv5p: "1200 GB/s"
+      tpuv6e: "400 GB/s"
+      tpu7x: ""
+      v100: "300 GB/s (NVLink)"
+      a100: "600 GB/s (NVLink)"
+      h100: "900 GB/s (NVLink)"
+      h200: "900 GB/s (NVLink)"
+      b200: "1800 GB/s (NVLink)"
+      gb200: "1800 GB/s (NVLink)"
+  - label: Max Scale (ICI Domain)
+    frameworks:
+      tpuv3: "1024 chips"
+      tpuv4: "4096 chips"
+      tpuv5e: "256 chips"
+      tpuv5p: "8960 chips"
+      tpuv6e: "256 chips"
+      tpu7x: ""
+      v100: "8 (Server)"
+      a100: "16 (NVSwitch)"
+      h100: "256 (SuperPOD)"
+      h200: "256 (SuperPOD)"
+      b200: "576 (NVLink)"
+      gb200: "576 (NVLink)"
+    remarks: |
+      - **ICI (Inter-Chip Interconnect)**: Dedicated fabric for chip-to-chip communication (TPU ICI or Nvidia NVLink).
+      - **ICI Domain**: Maximum number of chips connectable via the specialized low-latency fabric before requiring Ethernet/InfiniBand.
+      - **TPU v4/v5p**: Feature 3D Torus interconnects for massive scale.
+      - **Nvidia NVLink**: Historically server-scale, now scaling to hundreds with NVSwitch (e.g., NVL72/576).
