@@ -13,7 +13,6 @@
       h100: "2022"
       h200: "2023"
       b200: "2024"
-      gb200: "2024"
   - label: Architecture
     frameworks:
       tpuv3: "MXU"
@@ -27,7 +26,6 @@
       h100: "Hopper"
       h200: "Hopper"
       b200: "Blackwell"
-      gb200: "Blackwell"
 
 - name: Memory
   comparisons:
@@ -44,7 +42,6 @@
       h100: "80 GB"
       h200: "141 GB"
       b200: "192 GB"
-      gb200: "192 GB (per GPU)"
   - label: HBM Bandwidth
     frameworks:
       tpuv3: "900 GB/s"
@@ -58,21 +55,22 @@
       h100: "3350 GB/s"
       h200: "4800 GB/s"
       b200: "8000 GB/s"
-      gb200: "8000 GB/s"
-  - label: VMEM Capacity
+  - label: SMEM/VMEM Capacity
     frameworks:
       tpuv3: "16 MiB (per core)"
       tpuv4: "16 MiB (per core)"
       tpuv5e: "128 MiB"
-      tpuv5p: ""
-      tpuv6e: ""
-      tpu7x: ""
-      v100: "6 MiB (L2)"
-      a100: "40 MiB (L2)"
-      h100: "50 MiB (L2)"
-      h200: "60 MiB (L2)"
+      tpuv5p:
+        comment: (unpublished)
+      tpuv6e:
+        comment: (unpublished)
+      tpu7x:
+        comment: (unpublished)
+      v100: "6 MiB"
+      a100: "40 MiB"
+      h100: "50 MiB"
+      h200: "60 MiB"
       b200: ""
-      gb200: ""
     remarks: |
       - **TPU VMEM**: On-chip Vector Memory (SRAM) local to each TensorCore. Values are per-core unless shared.
       - **GPU L2**: For GPUs, the L2 cache is the closest architectural equivalent to the TPU's on-chip scratchpad memory.
@@ -92,7 +90,6 @@
       h100: "1979"
       h200: "1979"
       b200: "2250"
-      gb200: "2500"
     remarks: |
       - **TPU7x/Ironwood**: First dual-chiplet architecture, exposing 2 devices per chip.
       - **Nvidia Tensor Cores**: Figures are for Tensor Core performance (with sparsity where applicable for newer gens).
@@ -109,7 +106,6 @@
       h100: "3958"
       h200: "3958"
       b200: "4500"
-      gb200: "5000"
   - label: INT8 TFLOPS
     frameworks:
       tpuv3: ""
@@ -123,7 +119,6 @@
       h100: "3958"
       h200: "3958"
       b200: "4500"
-      gb200: "5000"
   - label: FP4 TFLOPS
     frameworks:
       tpuv3: ""
@@ -137,7 +132,6 @@
       h100: ""
       h200: ""
       b200: "9000"
-      gb200: "10000"
 
 - name: Interconnect & Scale
   comparisons:
@@ -149,12 +143,11 @@
       tpuv5p: "1200 GB/s"
       tpuv6e: "400 GB/s"
       tpu7x: ""
-      v100: "300 GB/s (NVLink)"
-      a100: "600 GB/s (NVLink)"
-      h100: "900 GB/s (NVLink)"
-      h200: "900 GB/s (NVLink)"
-      b200: "1800 GB/s (NVLink)"
-      gb200: "1800 GB/s (NVLink)"
+      v100: "300 GB/s"
+      a100: "600 GB/s"
+      h100: "900 GB/s"
+      h200: "900 GB/s"
+      b200: "1800 GB/s"
   - label: Max Scale (ICI Domain)
     frameworks:
       tpuv3: "1024 chips"
@@ -168,7 +161,6 @@
       h100: "256 (SuperPOD)"
       h200: "256 (SuperPOD)"
       b200: "576 (NVLink)"
-      gb200: "576 (NVLink)"
     remarks: |
       - **ICI (Inter-Chip Interconnect)**: Dedicated fabric for chip-to-chip communication (TPU ICI or Nvidia NVLink).
       - **ICI Domain**: Maximum number of chips connectable via the specialized low-latency fabric before requiring Ethernet/InfiniBand.
