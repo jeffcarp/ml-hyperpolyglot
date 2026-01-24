@@ -26,8 +26,8 @@ layout: default
       <tr>
         <td id="{{ comparison.label | slugify }}"><a href="#{{ comparison.label | slugify }}-note">{{ comparison.label }}</a></td>
         {% for framework in comparison.frameworks %}
-          {% if framework[1].js %}
-            <td>{% highlight js %}{{ framework[1].js }}{% endhighlight %}</td>
+          {% if framework[1].python %}
+            <td>{% highlight python %}{{ framework[1].python }}{% endhighlight %}</td>
           {% elsif framework[1].comment %}
             <td class="faded">{{ framework[1].comment }}</td>
           {% else %}
