@@ -1,23 +1,17 @@
-/* base.css */
-
 * {
   margin: 0;
   padding: 0;
 }
-body{
+body {
 	margin: 0px;
 	padding: 0px;
-}
-
-body
-{
-	font-family: verdana,arial,helvetica,sans-serif;
+  font-family: lucida grande, helvetica, arial, san-serif;
 	font-size: 0.82em;
-        padding: 1.5em;
+  padding: 1.5em;
 }
 
-h1,h2,h3,h4,h5,h6{
-	font-family: "Trebuchet MS", Trebuchet, Verdana, Arial, Helvetica;
+h1, h2, h3, h4, h5, h6 {
+	font-family: helvetica, arial, san-serif;
 }
 
 h1{
@@ -56,9 +50,6 @@ blockquote{
 	background-color: #f4f4f4;
 }
 
-table {
-	empty-cells: show;
-}
 td {
 	text-align: left;
 }
@@ -97,29 +88,12 @@ a.newpage{
 	position: relative;
 }
 
-#page-content{
-	
-}
-
-#container {
-	margin: 0;
-	padding: 0;
-}
-
 #header {
 	position: relative;
 	z-index: 30;
 	height: 7em;
 }
 
-#header h1{
-	margin: 0;
-	padding: 0;
-}
-#header h2{
-	margin: 0;
-	padding: 0;
-}
 
 #content-wrap{
 	padding:0; margin:0;
@@ -149,38 +123,44 @@ a.newpage{
 	text-align: center;
 }
 
-table {
-        font-size: 12px;
+table.wiki-content-table {
+  margin-left: 0em;
+  margin-bottom: 5em;
+	empty-cells: show;
+  font-size: 12px;
 	border: 1px solid #888;
 	border-collapse: collapse;
 	border-spacing: 0;
-	margin: 0.5em auto;
+	margin: 0.5em 0;
 }
-table td{
+table.wiki-content-table td {
 	border: 1px solid #888;
 	padding: 0.3em 0.7em;
 }
-table td.faded {
+table.wiki-content-table td.faded {
   color: #aaa;
 }
-table th{
+table.wiki-content-table th {
 	border: 0px solid #888;
 	padding: 0.3em 0.7em;
 	background-color: #EEE;
 }
 
-tt{
+table.wiki-content-table tt {
 	font-family: 'Andale Mono', 'Courier New', Courier, monospace; 
 	font-size: 98%;
+	color: #006060;
+	padding-left: 2px;
+	padding-right: 1px;
 }
 
 
-pre{
+pre {
 	font-family: 'Andale Mono', 'Courier New', Courier, monospace;
 }
 
 p {
-        margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 .code { 
@@ -424,31 +404,27 @@ display: none;
 width: 700px;
 }
 
-table {
-  margin-left: 0em;
-  margin-bottom: 5em;
-}
 
 #page-content blockquote {
 width: 650px;
 }
 
-tt {
-color: #006060;
-padding-left: 2px;
-padding-right: 1px;
+table,
+code,
+table tr td span.fixed,
+table tr td span.fixed * {
+	font-family: consolas, inconsolata, andale mono, monospace;
 }
 
-table  *, code, table tr td span.fixed, table tr td span.fixed * {
-font-family: consolas, inconsolata, andale mono, monospace;
-}
-
-*, table.wiki-content-table th *,  table.wiki-content-table td:first-child *, table.wiki-content-table td:first-child {
-font-family: lucida grande, helvetica, arial, san-serif;
+/* table *, */
+table.wiki-content-table th *,
+table.wiki-content-table td:first-child *,
+table.wiki-content-table td:first-child {
+	font-family: lucida grande, helvetica, arial, san-serif;
 }
 
 h1 span, div#page-title {
-font-family: helvetica, arial, san-serif;
+	font-family: helvetica, arial, san-serif;
 }
 
 .highlight .hll { background-color: #ffffcc }
@@ -528,4 +504,16 @@ font-family: helvetica, arial, san-serif;
 }
 #remarks ul {
   margin-left: 1.2em;
+}
+
+table.toc {
+	margin-top: 2em;
+	font-family: lucida grande, helvetica, arial, san-serif;
+}
+
+table.toc tr {
+	border: none;
+}
+table.toc td {
+	padding-right: 3em;
 }

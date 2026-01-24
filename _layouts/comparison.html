@@ -4,10 +4,20 @@ layout: default
 
 <h1><a href="{{ site.url }}{{ site.baseurl }}">{{ site.title }}</a> / {{ page.title }}</h1>
 
-<p>Contributions welcome on <a href="https://github.com/jeffcarp/ml-hyperpolyglot">GitHub</a>.</p>
+<p><i>a side-by-side reference sheet</i></p>
 
 {% assign categories = site.data[page.data_key] %}
 {% assign labels = site.data[page.labels_key] %}
+
+<p>
+{% for category in categories %}
+  {% if category.name %}
+    {% if forloop.first != true %} | {% endif %}<a href="#{{ category.name | slugify }}">{{ category.name | downcase }}</a>
+  {% endif %}
+{% endfor %}
+</p>
+
+<p>Contributions welcome on <a href="https://github.com/jeffcarp/ml-hyperpolyglot">GitHub</a>.</p>
 
 <table class="wiki-content-table">
   {% for category in categories %}

@@ -1,0 +1,379 @@
+- name: General
+  comparisons:
+  - label: First Release
+    frameworks:
+      PyTorch: 2016
+      Keras: 2015
+      JAX: 2018
+      TensorFlow: 2015
+  - label: PyPI Package
+    frameworks:
+      PyTorch: <a href="https://pypi.org/project/torch/">torch</a>
+      Keras: <a href="https://pypi.org/project/keras/">keras</a>
+      JAX: <a href="https://pypi.org/project/jax/">jax</a>
+      TensorFlow: <a href="https://pypi.org/project/tensorflow/">tensorflow</a>
+  - label: Default Image Format
+    frameworks:
+      PyTorch: "NCHW (channels first)"
+      Keras:
+        comment: (depends on backend)
+      JAX: "NHWC (channels last)"
+      TensorFlow: "NHWC (channels last)"
+
+- name: Core Characteristics
+  comparisons:
+  - label: Default Execution Model
+    frameworks:
+      PyTorch: "Eager"
+      Keras:
+        comment: (depends on backend)
+      JAX: "Eager"
+      TensorFlow: "Eager (2.x) or graph (1.x)"
+  - label: Compilation
+    frameworks:
+      PyTorch: torch.compile
+      Keras:
+        comment: (depends on backend)
+      JAX: jax.jit
+      TensorFlow: tf.function
+  - label: Automatic Differentiation
+    frameworks:
+      PyTorch:
+        python: |
+          loss = compute_loss(model(x), y)
+          loss.backward()
+          # gradients in param.grad
+      Keras:
+        comment: (via backend)
+      JAX:
+        python: |
+          grad_fn = jax.grad(loss_fn)
+          grads = grad_fn(params, x, y)
+      TensorFlow:
+        python: |
+          with tf.GradientTape() as tape:
+            loss = compute_loss(model(x), y)
+          grads = tape.gradient(loss, model.trainable_variables)
+  - label: Vectorization
+    frameworks:
+      PyTorch:
+        python: |
+          # Manual batching or torch.vmap
+          batched_fn = torch.vmap(fn)
+          outputs = batched_fn(inputs)
+      Keras:
+        comment: (via backend)
+      JAX:
+        python: |
+          batched_fn = jax.vmap(fn)
+          outputs = batched_fn(inputs)
+      TensorFlow:
+        python: |
+          # Manual batching via tf.map_fn
+          outputs = tf.map_fn(fn, inputs)
+  - label: Dynamic Shapes
+    frameworks:
+      PyTorch:
+        python: |
+          # Native support
+          x = torch.randn(batch_size, seq_len)
+      Keras:
+        comment: (via backend)
+      JAX:
+        python: |
+          # Shape polymorphism for export
+          @jax.jit
+          def f(x):  # works with varying shapes
+            return jax.numpy.sum(x)
+      TensorFlow:
+        python: |
+          # Native support in eager mode
+          @tf.function(input_signature=[tf.TensorSpec(shape=[None, None])])
+          def f(x):
+            return tf.reduce_sum(x)
+
+- name: Distributed Training
+  comparisons:
+  - label: DDP (Data Parallel)
+    frameworks:
+      PyTorch:
+        python: |
+          from torch.distributed.ddp import DistributedDataParallel
+          model = DistributedDataParallel(model)
+      Keras:
+        comment: (via backend)
+      JAX:
+        python: |
+          # Replicate across devices
+          sharding = NamedSharding(mesh, PartitionSpec('data'))
+          @jax.jit
+          def train_step(state, batch):
+            return updated_state
+      TensorFlow:
+        python: |
+          strategy = tf.distribute.MirroredStrategy()
+          with strategy.scope():
+            model = create_model()
+  - label: FSDP (Fully Sharded)
+    frameworks:
+      PyTorch:
+        python: |
+          from torch.distributed.fsdp import FullyShardedDataParallel
+          model = FullyShardedDataParallel(model)
+      Keras:
+        comment: (via backend)
+      JAX:
+        python: |
+          # Shard params across devices
+          sharding = NamedSharding(mesh, PartitionSpec(None, 'fsdp'))
+          @jax.jit
+          def train_step(params, batch):
+            return updated_params
+      TensorFlow:
+        python: |
+          strategy = tf.distribute.experimental.ParameterServerStrategy(...)
+          with strategy.scope():
+            model = create_model()
+  - label: TP (Tensor Parallel)
+    frameworks:
+      PyTorch:
+        python: |
+          # Via torch.distributed.tensor or libraries
+          from torch.distributed.tensor.parallel import parallelize_module
+          parallelize_module(model, device_mesh, parallelize_plan)
+      Keras:
+        comment: (via backend)
+      JAX:
+        python: |
+          # Partition tensors across devices
+          sharding = NamedSharding(mesh, PartitionSpec('data', 'fsdp'))
+          @jax.jit
+          def forward(weights, x):
+            return x @ weights
+      TensorFlow:
+        python: |
+          layout = dtensor.Layout.batch_sharded(mesh, 'model', rank=2)
+          weights = dtensor.DVariable(initial_value, layout=layout)
+
+- name: Layers
+  comparisons:
+  - label: Dense / Linear
+    frameworks:
+      PyTorch:
+        python: nn.Linear(in_features, out_features)
+      Keras:
+        python: layers.Dense(units)
+      JAX:
+        python: nnx.Linear(in_features, out_features, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Dense(units)
+  - label: Conv2D
+    frameworks:
+      PyTorch:
+        python: nn.Conv2d(in_channels, out_channels, kernel_size)
+      Keras:
+        python: layers.Conv2D(filters, kernel_size)
+      JAX:
+        python: nnx.Conv(in_features, out_features, kernel_size, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Conv2D(filters, kernel_size)
+  - label: Conv1D
+    frameworks:
+      PyTorch:
+        python: nn.Conv1d(in_channels, out_channels, kernel_size)
+      Keras:
+        python: layers.Conv1D(filters, kernel_size)
+      JAX:
+        python: nnx.Conv(in_features, out_features, kernel_size=(kernel_size,), rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Conv1D(filters, kernel_size)
+  - label: Conv3D
+    frameworks:
+      PyTorch:
+        python: nn.Conv3d(in_channels, out_channels, kernel_size)
+      Keras:
+        python: layers.Conv3D(filters, kernel_size)
+      JAX:
+        python: nnx.Conv(in_features, out_features, kernel_size=(k, k, k), rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Conv3D(filters, kernel_size)
+  - label: ConvTranspose2D
+    frameworks:
+      PyTorch:
+        python: nn.ConvTranspose2d(in_channels, out_channels, kernel_size)
+      Keras:
+        python: layers.Conv2DTranspose(filters, kernel_size)
+      JAX:
+        python: nnx.ConvTranspose(in_features, out_features, kernel_size, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Conv2DTranspose(filters, kernel_size)
+  - label: MaxPool2D
+    frameworks:
+      PyTorch:
+        python: nn.MaxPool2d(kernel_size)
+      Keras:
+        python: layers.MaxPooling2D(pool_size)
+      JAX:
+        python: nnx.max_pool(x, window_shape, strides)
+      TensorFlow:
+        python: tf.keras.layers.MaxPooling2D(pool_size)
+  - label: AvgPool2D
+    frameworks:
+      PyTorch:
+        python: nn.AvgPool2d(kernel_size)
+      Keras:
+        python: layers.AveragePooling2D(pool_size)
+      JAX:
+        python: nnx.avg_pool(x, window_shape, strides)
+      TensorFlow:
+        python: tf.keras.layers.AveragePooling2D(pool_size)
+  - label: BatchNorm
+    frameworks:
+      PyTorch:
+        python: nn.BatchNorm2d(num_features)
+      Keras:
+        python: layers.BatchNormalization()
+      JAX:
+        python: nnx.BatchNorm(num_features, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.BatchNormalization()
+  - label: LayerNorm
+    frameworks:
+      PyTorch:
+        python: nn.LayerNorm(normalized_shape)
+      Keras:
+        python: layers.LayerNormalization()
+      JAX:
+        python: nnx.LayerNorm(num_features, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.LayerNormalization()
+  - label: Dropout
+    frameworks:
+      PyTorch:
+        python: nn.Dropout(p=0.5)
+      Keras:
+        python: layers.Dropout(rate=0.5)
+      JAX:
+        python: nnx.Dropout(rate=0.5, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Dropout(rate=0.5)
+  - label: ReLU
+    frameworks:
+      PyTorch:
+        python: nn.ReLU()
+      Keras:
+        python: layers.ReLU()
+      JAX:
+        python: nnx.relu
+      TensorFlow:
+        python: tf.keras.layers.ReLU()
+  - label: Softmax
+    frameworks:
+      PyTorch:
+        python: nn.Softmax(dim=-1)
+      Keras:
+        python: layers.Softmax()
+      JAX:
+        python: nnx.softmax
+      TensorFlow:
+        python: tf.keras.layers.Softmax()
+  - label: Embedding
+    frameworks:
+      PyTorch:
+        python: nn.Embedding(num_embeddings, embedding_dim)
+      Keras:
+        python: layers.Embedding(input_dim, output_dim)
+      JAX:
+        python: nnx.Embed(num_embeddings, features, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.Embedding(input_dim, output_dim)
+  - label: LSTM
+    frameworks:
+      PyTorch:
+        python: nn.LSTM(input_size, hidden_size)
+      Keras:
+        python: layers.LSTM(units)
+      JAX:
+        python: nnx.LSTM(in_features, hidden_size, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.LSTM(units)
+  - label: GRU
+    frameworks:
+      PyTorch:
+        python: nn.GRU(input_size, hidden_size)
+      Keras:
+        python: layers.GRU(units)
+      JAX:
+        python: nnx.GRU(in_features, hidden_size, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.GRU(units)
+  - label: MultiHeadAttention
+    frameworks:
+      PyTorch:
+        python: nn.MultiheadAttention(embed_dim, num_heads)
+      Keras:
+        python: layers.MultiHeadAttention(num_heads, key_dim)
+      JAX:
+        python: nnx.MultiHeadAttention(num_heads, in_features, rngs=rngs)
+      TensorFlow:
+        python: tf.keras.layers.MultiHeadAttention(num_heads, key_dim)
+  - label: Flatten
+    frameworks:
+      PyTorch:
+        python: nn.Flatten()
+      Keras:
+        python: layers.Flatten()
+      JAX:
+        python: x.reshape(x.shape[0], -1)
+      TensorFlow:
+        python: tf.keras.layers.Flatten()
+  - label: Reshape
+    frameworks:
+      PyTorch:
+        python: x.view(batch_size, -1)
+      Keras:
+        python: layers.Reshape(target_shape)
+      JAX:
+        python: x.reshape(new_shape)
+      TensorFlow:
+        python: tf.keras.layers.Reshape(target_shape)
+  - label: Concatenate
+    frameworks:
+      PyTorch:
+        python: torch.cat([x1, x2], dim=1)
+      Keras:
+        python: layers.Concatenate()([x1, x2])
+      JAX:
+        python: jnp.concatenate([x1, x2], axis=1)
+      TensorFlow:
+        python: tf.keras.layers.Concatenate()([x1, x2])
+  - label: Add
+    frameworks:
+      PyTorch:
+        python: x1 + x2
+      Keras:
+        python: layers.Add()([x1, x2])
+      JAX:
+        python: x1 + x2
+      TensorFlow:
+        python: tf.keras.layers.Add()([x1, x2])
+  - label: GlobalAvgPool2D
+    frameworks:
+      PyTorch:
+        python: nn.AdaptiveAvgPool2d((1, 1))
+      Keras:
+        python: layers.GlobalAveragePooling2D()
+      JAX:
+        python: jnp.mean(x, axis=(1, 2))
+      TensorFlow:
+        python: tf.keras.layers.GlobalAveragePooling2D()
+  - label: GlobalMaxPool2D
+    frameworks:
+      PyTorch:
+        python: nn.AdaptiveMaxPool2d((1, 1))
+      Keras:
+        python: layers.GlobalMaxPooling2D()
+      JAX:
+        python: jnp.max(x, axis=(1, 2))
+      TensorFlow:
+        python: tf.keras.layers.GlobalMaxPooling2D()
