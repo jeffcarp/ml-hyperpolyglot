@@ -148,6 +148,21 @@
       h100: "900 GB/s"
       h200: "900 GB/s"
       b200: "1800 GB/s"
+  - label: DCN Bandwidth (Per Chip)
+    frameworks:
+      tpuv3: "~10 GB/s (100 Gbps)"
+      tpuv4: "~12.5 GB/s (100 Gbps)"
+      tpuv5e: "~12.5 GB/s (100 Gbps)"
+      tpuv5p: "~25 GB/s (200 Gbps)"
+      tpuv6e: "~25 GB/s (200 Gbps)"
+      tpu7x: ""
+      v100: "~12.5 GB/s (100 Gbps)"
+      a100: "~25 GB/s (200 Gbps)"
+      h100: "~50 GB/s (400 Gbps)"
+      h200: "~50 GB/s (400 Gbps)"
+      b200: "~50-100 GB/s (400-800 Gbps)"
+    remarks: |
+      - **DCN (Data Center Network)**: Network bandwidth for inter-rack communication, typically Ethernet or InfiniBand. Values are approximate and vary by deployment.
   - label: Max Scale (ICI Domain)
     frameworks:
       tpuv3: "1024 chips"
@@ -155,7 +170,7 @@
       tpuv5e: "256 chips"
       tpuv5p: "8960 chips"
       tpuv6e: "256 chips"
-      tpu7x: ""
+      tpu7x: "9216 chips"
       v100: "8 (Server)"
       a100: "16 (NVSwitch)"
       h100: "256 (SuperPOD)"
@@ -165,4 +180,5 @@
       - **ICI (Inter-Chip Interconnect)**: Dedicated fabric for chip-to-chip communication (TPU ICI or Nvidia NVLink).
       - **ICI Domain**: Maximum number of chips connectable via the specialized low-latency fabric before requiring Ethernet/InfiniBand.
       - **TPU v4/v5p**: Feature 3D Torus interconnects for massive scale.
+      - **[TPU 7x docs](https://docs.cloud.google.com/tpu/docs/tpu7x)**
       - **Nvidia NVLink**: Historically server-scale, now scaling to hundreds with NVSwitch (e.g., NVL72/576).
