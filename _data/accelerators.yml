@@ -42,19 +42,19 @@
       h100: "80 GB"
       h200: "141 GB"
       b200: "192 GB"
-  - label: HBM Bandwidth
+  - label: HBM Bandwidth (GB/s)
     frameworks:
-      tpuv3: "900 GB/s"
-      tpuv4: "1200 GB/s"
-      tpuv5e: "819 GB/s"
-      tpuv5p: "2765 GB/s"
-      tpuv6e: "1638 GB/s"
-      tpu7x: "7380 GB/s"
-      v100: "900 GB/s"
-      a100: "2039 GB/s"
-      h100: "3350 GB/s"
-      h200: "4800 GB/s"
-      b200: "8000 GB/s"
+      tpuv3: "900"
+      tpuv4: "1200"
+      tpuv5e: "819"
+      tpuv5p: "2765"
+      tpuv6e: "1638"
+      tpu7x: "7380"
+      v100: "900"
+      a100: "2039"
+      h100: "3350"
+      h200: "4800"
+      b200: "8000"
   - label: SMEM/VMEM Capacity
     frameworks:
       tpuv3: "16 MiB (per core)"
@@ -106,7 +106,7 @@
       h100: "3958"
       h200: "3958"
       b200: "4500"
-  - label: INT8 TFLOPS
+  - label: INT8 TOPS
     frameworks:
       tpuv3: ""
       tpuv4: "275"
@@ -135,19 +135,19 @@
 
 - name: Interconnect & Scale
   comparisons:
-  - label: ICI Bandwidth (Per Chip)
+  - label: ICI Bandwidth (Per Chip) (GB / s)
     frameworks:
-      tpuv3: "656 GB/s"
-      tpuv4: "300 GB/s"
-      tpuv5e: "200 GB/s"
-      tpuv5p: "1200 GB/s"
-      tpuv6e: "400 GB/s"
-      tpu7x: ""
-      v100: "300 GB/s"
-      a100: "600 GB/s"
-      h100: "900 GB/s"
-      h200: "900 GB/s"
-      b200: "1800 GB/s"
+      tpuv3: 656
+      tpuv4: 300
+      tpuv5e: 200
+      tpuv5p: 1200
+      tpuv6e: 400
+      tpu7x:
+      v100: 300
+      a100: 600
+      h100: 900
+      h200: 900
+      b200: 1800
   - label: DCN Bandwidth (Per Chip)
     frameworks:
       tpuv3: "~10 GB/s (100 Gbps)"
