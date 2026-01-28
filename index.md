@@ -16,4 +16,11 @@ _Comparisons of ML tools in a side-by-side format, inspired by [Hyperpolyglot](h
     <td><b>Frameworks:</b></td>
     <td><a href="frameworks.html">PyTorch, Keras, JAX, TensorFlow</a></td>
   </tr>
+  <!--
+  TODO: uncomment when ready.
+  <tr>
+    <td><b>Models:</b></td>
+    <td><a href="models.html">Llama 3, Mistral, Gemma</a></td>
+  </tr>
+  -->
 </table>

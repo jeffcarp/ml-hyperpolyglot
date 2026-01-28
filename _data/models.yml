@@ -1,0 +1,121 @@
+- name: General
+  comparisons:
+  - label: Organization
+    frameworks:
+      llama3_8b: Meta
+      llama3_70b: Meta
+      mistral_7b: Mistral AI
+      mixtral_8x7b: Mistral AI
+      gemma_7b: Google DeepMind
+      deepseek_v2: DeepSeek
+      qwen25_72b: Alibaba
+      glm4_9b: Zhipu AI
+      yi15_34b: 01.AI
+  - label: License
+    frameworks:
+      llama3_8b: Llama 3 Community
+      llama3_70b: Llama 3 Community
+      mistral_7b: Apache 2.0
+      mixtral_8x7b: Apache 2.0
+      gemma_7b: Gemma Terms
+      deepseek_v2: DeepSeek License
+      qwen25_72b: Apache 2.0
+      glm4_9b: GLM-4 License
+      yi15_34b: Apache 2.0
+  - label: Architecture
+    frameworks:
+      llama3_8b: Dense Decoder
+      llama3_70b: Dense Decoder
+      mistral_7b: Dense Decoder
+      mixtral_8x7b: Sparse MoE Decoder
+      gemma_7b: Dense Decoder
+      deepseek_v2: Sparse MoE Decoder
+      qwen25_72b: Dense Decoder
+      glm4_9b: Dense Decoder
+      yi15_34b: Dense Decoder
+  - label: Parameters
+    frameworks:
+      llama3_8b: 8B
+      llama3_70b: 70B
+      mistral_7b: 7B
+      mixtral_8x7b: 47B (13B active)
+      gemma_7b: 7B
+      deepseek_v2: 236B (21B active)
+      qwen25_72b: 72B
+      glm4_9b: 9B
+      yi15_34b: 34B
+  - label: Context Window
+    frameworks:
+      llama3_8b: 8k
+      llama3_70b: 8k
+      mistral_7b: 32k
+      mixtral_8x7b: 32k
+      gemma_7b: 8k
+      deepseek_v2: 128k
+      qwen25_72b: 128k
+      glm4_9b: 128k
+      yi15_34b: 200k
+  - label: Vocab Size
+    frameworks:
+      llama3_8b: 128k
+      llama3_70b: 128k
+      mistral_7b: 32k
+      mixtral_8x7b: 32k
+      gemma_7b: 256k
+      deepseek_v2: 102k
+      qwen25_72b: 152k
+      glm4_9b: 151k
+      yi15_34b: 64k
+
+- name: Architecture
+  comparisons:
+  - label: Attention Variant
+    frameworks:
+      llama3_8b: GQA
+      llama3_70b: GQA
+      mistral_7b: GQA (SWA)
+      mixtral_8x7b: GQA
+      gemma_7b: MHA
+      deepseek_v2: MLA
+      qwen25_72b: GQA
+      glm4_9b: GQA
+      yi15_34b: GQA
+    remarks: |
+      - **MHA (Multi-Head Attention)**: Each query head has its own Key and Value head. High memory overhead for KV cache.
+      - **GQA (Grouped-Query Attention)**: Multiple query heads share a single Key/Value head. A middle ground between MHA and MQA (Multi-Query Attention).
+      - **MLA (Multi-head Latent Attention)**: Compresses the KV cache into a latent vector to significantly reduce memory usage during inference.
+      - **SWA (Sliding Window Attention)**: Limits attention to a fixed-size window of previous tokens to reduce computational complexity for long sequences.
+
+  - label: Layers
+    frameworks:
+      llama3_8b: 32
+      llama3_70b: 80
+      mistral_7b: 32
+      mixtral_8x7b: 32
+      gemma_7b: 28
+      deepseek_v2: 60
+      qwen25_72b: 80
+      glm4_9b: 40
+      yi15_34b: 60
+  - label: Model Dim
+    frameworks:
+      llama3_8b: 4096
+      llama3_70b: 8192
+      mistral_7b: 4096
+      mixtral_8x7b: 4096
+      gemma_7b: 3072
+      deepseek_v2: 5120
+      qwen25_72b: 8192
+      glm4_9b: 4096
+      yi15_34b: 7168
+  - label: Activation
+    frameworks:
+      llama3_8b: SwiGLU
+      llama3_70b: SwiGLU
+      mistral_7b: SwiGLU
+      mixtral_8x7b: SwiGLU
+      gemma_7b: GeGLU
+      deepseek_v2: SwiGLU
+      qwen25_72b: SwiGLU
+      glm4_9b: SwiGLU
+      yi15_34b: SwiGLU
