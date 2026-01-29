@@ -12,6 +12,7 @@
       a100: "2020"
       h100: "2022"
       h200: "2023"
+      l4: "2023"
       b200: "2024"
   - label: Architecture
     frameworks:
@@ -25,6 +26,7 @@
       a100: "Ampere"
       h100: "Hopper"
       h200: "Hopper"
+      l4: "Ada Lovelace"
       b200: "Blackwell"
 
 - name: Memory
@@ -41,6 +43,7 @@
       a100: "80 GB"
       h100: "80 GB"
       h200: "141 GB"
+      l4: "24 GB (GDDR6)"
       b200: "192 GB"
   - label: HBM Bandwidth (GB/s)
     frameworks:
@@ -54,6 +57,7 @@
       a100: "2039"
       h100: "3350"
       h200: "4800"
+      l4: "300"
       b200: "8000"
   - label: SMEM/VMEM Capacity
     frameworks:
@@ -70,6 +74,7 @@
       a100: "40 MiB"
       h100: "50 MiB"
       h200: "60 MiB"
+      l4: ""
       b200: ""
     remarks: |
       - **TPU VMEM**: On-chip Vector Memory (SRAM) local to each TensorCore. Values are per-core unless shared.
@@ -89,6 +94,7 @@
       a100: "312"
       h100: "1979"
       h200: "1979"
+      l4: "121"
       b200: "2250"
     remarks: |
       - **TPU7x/Ironwood**: First dual-chiplet architecture, exposing 2 devices per chip.
@@ -105,6 +111,7 @@
       a100: ""
       h100: "3958"
       h200: "3958"
+      l4: "242"
       b200: "4500"
   - label: INT8 TOPS
     frameworks:
@@ -118,6 +125,7 @@
       a100: "624"
       h100: "3958"
       h200: "3958"
+      l4: "242"
       b200: "4500"
   - label: FP4 TFLOPS
     frameworks:
@@ -131,6 +139,7 @@
       a100: ""
       h100: ""
       h200: ""
+      l4: ""
       b200: "9000"
 
 - name: Interconnect & Scale
@@ -147,6 +156,7 @@
       a100: 600
       h100: 900
       h200: 900
+      l4:
       b200: 1800
   - label: DCN Bandwidth (Per Chip)
     frameworks:
@@ -160,6 +170,7 @@
       a100: "~25 GB/s (200 Gbps)"
       h100: "~50 GB/s (400 Gbps)"
       h200: "~50 GB/s (400 Gbps)"
+      l4: "~50 GB/s (400 Gbps)"
       b200: "~50-100 GB/s (400-800 Gbps)"
     remarks: |
       - **DCN (Data Center Network)**: Network bandwidth for inter-rack communication, typically Ethernet or InfiniBand. Values are approximate and vary by deployment.
@@ -175,6 +186,7 @@
       a100: "16 (NVSwitch)"
       h100: "256 (SuperPOD)"
       h200: "256 (SuperPOD)"
+      l4: "8 (Server)"
       b200: "576 (NVLink)"
     remarks: |
       - **ICI (Inter-Chip Interconnect)**: Dedicated fabric for chip-to-chip communication (TPU ICI or Nvidia NVLink).

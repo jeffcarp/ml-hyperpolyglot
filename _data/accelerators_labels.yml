@@ -1,11 +1,24 @@
-- TPU v3
-- TPU v4
-- TPU v5e
-- TPU v5p
-- TPU v6e (Trillium)
-- TPU7x (Ironwood)
-- Nvidia V100
-- Nvidia A100
-- Nvidia H100
-- Nvidia H200
-- Nvidia B200
+- key: tpuv3
+  label: TPU v3
+- key: tpuv4
+  label: TPU v4
+- key: tpuv5e
+  label: TPU v5e
+- key: tpuv5p
+  label: TPU v5p
+- key: tpuv6e
+  label: TPU v6e (Trillium)
+- key: tpu7x
+  label: TPU7x (Ironwood)
+- key: v100
+  label: Nvidia V100
+- key: a100
+  label: Nvidia A100
+- key: h100
+  label: Nvidia H100
+- key: h200
+  label: Nvidia H200
+- key: l4
+  label: Nvidia L4
+- key: b200
+  label: Nvidia B200
