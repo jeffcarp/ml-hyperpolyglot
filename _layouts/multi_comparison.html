@@ -1,0 +1,73 @@
+---
+layout: default
+---
+
+<h1><a href="{{ site.url }}{{ site.baseurl }}">{{ site.title }}</a> / {{ page.title }}</h1>
+
+<p><i>a side-by-side reference sheet</i></p>
+
+<p>
+{% for section in page.sections %}
+  {% if forloop.first != true %} | {% endif %}<a href="#{{ section.title | slugify }}">{{ section.title }}</a>
+{% endfor %}
+</p>
+
+<p>Contributions welcome on <a href="https://github.com/jeffcarp/ml-hyperpolyglot">GitHub</a>.</p>
+
+{% for section in page.sections %}
+  <h2 id="{{ section.title | slugify }}" style="margin-top: 2em; border-bottom: 1px solid #ccc;">{{ section.title }}</h2>
+  
+  {% assign categories = site.data[section.data_key] %}
+  {% assign labels = site.data[section.labels_key] %}
+
+  <table class="wiki-content-table">
+    <thead>
+      <tr>
+        <th></th>
+        {% for label in labels %}
+          <th>{{ label.label }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for category in categories %}
+       {% if category.name %}
+        <tr>
+          <th colspan="{{ labels | size | plus: 1 }}" style="background-color: #f9f9f9; text-align: left;">{{ category.name }}</th>
+        </tr>
+       {% endif %}
+
+       {% for comparison in category.comparisons %}
+         <tr>
+           <td>{{ comparison.label }}</td>
+           {% for label_obj in labels %}
+             {% assign val = comparison.frameworks[label_obj.key] %}
+             {% if val.python %}
+                <td>{% highlight python %}{{ val.python }}{% endhighlight %}</td>
+             {% elsif val.comment %}
+                <td class="faded">{{ val.comment }}</td>
+             {% else %}
+                <td>{{ val }}</td>
+             {% endif %}
+           {% endfor %}
+         </tr>
+       {% endfor %}
+    {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+<div id="remarks" style="margin-top: 3em;">
+  <h1>Remarks</h1>
+  {% for section in page.sections %}
+    {% assign categories = site.data[section.data_key] %}
+    {% for category in categories %}
+      {% for comparison in category.comparisons %}
+        {% if comparison.remarks %}
+           <h3>{{ comparison.label }}</h3>
+           {{ comparison.remarks | markdownify }}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+</div>

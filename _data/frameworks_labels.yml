@@ -1,4 +1,8 @@
-- PyTorch
-- Keras
-- JAX
-- TensorFlow
+- key: PyTorch
+  label: PyTorch
+- key: Keras
+  label: Keras
+- key: JAX
+  label: JAX
+- key: TensorFlow
+  label: TensorFlow
