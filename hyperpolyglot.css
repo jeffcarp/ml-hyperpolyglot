@@ -516,4 +516,6 @@ table.toc tr {
 }
 table.toc td {
 	padding-right: 3em;
+	padding-bottom: 0.3em;
+  font-size: 1.05em;
 }
