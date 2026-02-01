@@ -2,120 +2,60 @@
   comparisons:
   - label: Organization
     frameworks:
-      llama3_8b: Meta
-      llama3_70b: Meta
-      mistral_7b: Mistral AI
-      mixtral_8x7b: Mistral AI
-      gemma_7b: Google DeepMind
-      deepseek_v2: DeepSeek
-      qwen25_72b: Alibaba
-      glm4_9b: Zhipu AI
-      yi15_34b: 01.AI
+      gpt_oss_120b: OpenAI
+      deepseek_v32: DeepSeek
+      kimi_k2: Moonshot AI
+      qwen3_235b: Alibaba
+      glm_47: Zhipu AI
   - label: License
     frameworks:
-      llama3_8b: Llama 3 Community
-      llama3_70b: Llama 3 Community
-      mistral_7b: Apache 2.0
-      mixtral_8x7b: Apache 2.0
-      gemma_7b: Gemma Terms
-      deepseek_v2: DeepSeek License
-      qwen25_72b: Apache 2.0
-      glm4_9b: GLM-4 License
-      yi15_34b: Apache 2.0
-  - label: Architecture
+      gpt_oss_120b: Apache 2.0
+      deepseek_v32: DeepSeek License
+      kimi_k2: Kimi License
+      qwen3_235b: Apache 2.0
+      glm_47: MIT
+  - label: Parameters (Total)
     frameworks:
-      llama3_8b: Dense Decoder
-      llama3_70b: Dense Decoder
-      mistral_7b: Dense Decoder
-      mixtral_8x7b: Sparse MoE Decoder
-      gemma_7b: Dense Decoder
-      deepseek_v2: Sparse MoE Decoder
-      qwen25_72b: Dense Decoder
-      glm4_9b: Dense Decoder
-      yi15_34b: Dense Decoder
-  - label: Parameters
+      gpt_oss_120b: 117B
+      deepseek_v32: 685B
+      kimi_k2: 1T
+      qwen3_235b: 235B
+      glm_47: 400B
+  - label: Parameters (Active)
     frameworks:
-      llama3_8b: 8B
-      llama3_70b: 70B
-      mistral_7b: 7B
-      mixtral_8x7b: 47B (13B active)
-      gemma_7b: 7B
-      deepseek_v2: 236B (21B active)
-      qwen25_72b: 72B
-      glm4_9b: 9B
-      yi15_34b: 34B
+      gpt_oss_120b: 5.1B
+      deepseek_v32: 
+      kimi_k2: 32B
+      qwen3_235b: 22B
+      glm_47: 32B
   - label: Context Window
     frameworks:
-      llama3_8b: 8k
-      llama3_70b: 8k
-      mistral_7b: 32k
-      mixtral_8x7b: 32k
-      gemma_7b: 8k
-      deepseek_v2: 128k
-      qwen25_72b: 128k
-      glm4_9b: 128k
-      yi15_34b: 200k
-  - label: Vocab Size
-    frameworks:
-      llama3_8b: 128k
-      llama3_70b: 128k
-      mistral_7b: 32k
-      mixtral_8x7b: 32k
-      gemma_7b: 256k
-      deepseek_v2: 102k
-      qwen25_72b: 152k
-      glm4_9b: 151k
-      yi15_34b: 64k
+      gpt_oss_120b: 128k
+      deepseek_v32: 128k
+      kimi_k2: 256k
+      qwen3_235b: 128k-256k
+      glm_47: 200k
 
 - name: Architecture
   comparisons:
-  - label: Attention Variant
+  - label: Architecture Type
     frameworks:
-      llama3_8b: GQA
-      llama3_70b: GQA
-      mistral_7b: GQA (SWA)
-      mixtral_8x7b: GQA
-      gemma_7b: MHA
-      deepseek_v2: MLA
-      qwen25_72b: GQA
-      glm4_9b: GQA
-      yi15_34b: GQA
-    remarks: |
-      - **MHA (Multi-Head Attention)**: Each query head has its own Key and Value head. High memory overhead for KV cache.
-      - **GQA (Grouped-Query Attention)**: Multiple query heads share a single Key/Value head. A middle ground between MHA and MQA (Multi-Query Attention).
-      - **MLA (Multi-head Latent Attention)**: Compresses the KV cache into a latent vector to significantly reduce memory usage during inference.
-      - **SWA (Sliding Window Attention)**: Limits attention to a fixed-size window of previous tokens to reduce computational complexity for long sequences.
-
-  - label: Layers
+      gpt_oss_120b: Sparse MoE
+      deepseek_v32: Sparse MoE (DSA)
+      kimi_k2: Sparse MoE
+      qwen3_235b: Sparse MoE
+      glm_47: Sparse MoE
+  - label: Attention
     frameworks:
-      llama3_8b: 32
-      llama3_70b: 80
-      mistral_7b: 32
-      mixtral_8x7b: 32
-      gemma_7b: 28
-      deepseek_v2: 60
-      qwen25_72b: 80
-      glm4_9b: 40
-      yi15_34b: 60
-  - label: Model Dim
+      gpt_oss_120b: GQA
+      deepseek_v32: MLA (DSA)
+      kimi_k2: MLA
+      qwen3_235b: GQA
+      glm_47: Interleaved
+  - label: Tokenizer
     frameworks:
-      llama3_8b: 4096
-      llama3_70b: 8192
-      mistral_7b: 4096
-      mixtral_8x7b: 4096
-      gemma_7b: 3072
-      deepseek_v2: 5120
-      qwen25_72b: 8192
-      glm4_9b: 4096
-      yi15_34b: 7168
-  - label: Activation
-    frameworks:
-      llama3_8b: SwiGLU
-      llama3_70b: SwiGLU
-      mistral_7b: SwiGLU
-      mixtral_8x7b: SwiGLU
-      gemma_7b: GeGLU
-      deepseek_v2: SwiGLU
-      qwen25_72b: SwiGLU
-      glm4_9b: SwiGLU
-      yi15_34b: SwiGLU
+      gpt_oss_120b: BPE (o200k)
+      deepseek_v32: BPE
+      kimi_k2: BPE (160k)
+      qwen3_235b: BPE
+      glm_47: BPE

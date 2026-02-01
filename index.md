@@ -16,11 +16,8 @@ _Comparisons of ML tools in a side-by-side format, inspired by [Hyperpolyglot](h
     <td><b>Frameworks:</b></td>
     <td><a href="frameworks.html">PyTorch, Keras, JAX, TensorFlow</a></td>
   </tr>
-  <!--
-  TODO: uncomment when ready.
   <tr>
     <td><b>Models:</b></td>
-    <td><a href="models.html">Llama 3, Mistral, Gemma</a></td>
+    <td><a href="models.html">GPT-OSS 120B, DeepSeek V3.2, Kimi K2, Qwen3, GLM-4.7</a></td>
   </tr>
-  -->
 </table>

@@ -1,9 +1,10 @@
-- llama3_8b
-- llama3_70b
-- mistral_7b
-- mixtral_8x7b
-- gemma_7b
-- deepseek_v2
-- qwen25_72b
-- glm4_9b
-- yi15_34b
+- key: gpt_oss_120b
+  label: GPT-OSS 120B
+- key: deepseek_v32
+  label: DeepSeek V3.2
+- key: kimi_k2
+  label: Kimi K2
+- key: qwen3_235b
+  label: Qwen3-235B
+- key: glm_47
+  label: GLM-4.7
