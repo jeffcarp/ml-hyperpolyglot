@@ -1,0 +1,16 @@
+- key: ppo
+  label: PPO
+- key: dpo
+  label: DPO
+- key: grpo
+  label: GRPO
+- key: dapo
+  label: DAPO
+- key: online_dpo
+  label: Online DPO
+- key: prm
+  label: PRM
+- key: simpo
+  label: SimPO
+- key: orpo
+  label: ORPO

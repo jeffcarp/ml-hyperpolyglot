@@ -1,0 +1,88 @@
+- name: General
+  comparisons:
+  - label: Full Name
+    frameworks:
+      ppo: Proximal Policy Optimization
+      dpo: Direct Preference Optimization
+      grpo: Group Relative Policy Optimization
+      dapo: Direct Alignment from Preference Optimization
+      online_dpo: Online Direct Preference Optimization
+      prm: Process Reward Model
+      simpo: Simple Preference Optimization
+      orpo: Odds Ratio Preference Optimization
+  - label: Primary Training Signal
+    frameworks:
+      ppo: Reward Model (Scalar)
+      dpo: Preference Pairs (Binary)
+      grpo: Reward Model (Scalar) / Rules
+      dapo: Preference Pairs + KL
+      online_dpo: Real-time Preferences
+      prm: Step-wise Rewards
+      simpo: Reference-free Preferences
+      orpo: SFT + Odds Ratio
+  - label: Reference Model Required
+    frameworks:
+      ppo: Yes (KL Penalty)
+      dpo: Yes (Implicit Reward)
+      grpo: Yes (KL Penalty)
+      dapo: Yes
+      online_dpo: Yes
+      prm: N/A
+      simpo: No
+      orpo: No
+
+- name: Complexity & Efficiency
+  comparisons:
+  - label: Auxiliary Models
+    frameworks:
+      ppo: Critic, Reward, Reference
+      dpo: Reference
+      grpo: Reference (No Critic)
+      dapo: Reference
+      online_dpo: Reference + Buffer
+      prm: Reward Model (Step-level)
+      simpo: None
+      orpo: None
+  - label: Stability
+    frameworks:
+      ppo: Moderate (Sensitive to hyperparams)
+      dpo: High
+      grpo: High
+      dapo: High
+      online_dpo: Moderate
+      prm: High (for search)
+      simpo: High
+      orpo: High
+  - label: Memory Efficiency
+    frameworks:
+      ppo: Low (4+ models in VRAM)
+      dpo: Moderate (2 models)
+      grpo: Moderate (2 models)
+      dapo: Moderate
+      online_dpo: Moderate
+      prm: Low (Requires step labeling)
+      simpo: High (1 model)
+      orpo: High (1 model)
+
+- name: Characteristics
+  comparisons:
+  - label: Key Innovation
+    frameworks:
+      ppo: Clipped objective for stability
+      dpo: Closed-form solution to RLHF
+      grpo: Replaces critic with group baseline
+      dapo: Refined KL constraint
+      online_dpo: Iterative sampling to reduce drift
+      prm: Rewarding "reasoning steps"
+      simpo: Length-normalized log-prob margin
+      orpo: Single-stage alignment
+  - label: Popular Usage (2025-2026)
+    frameworks:
+      ppo: Llama 2/3 RLHF
+      dpo: Mistral/Zephyr fine-tuning
+      grpo: DeepSeek-V3 / R1 reasoning
+      dapo: Academic research
+      online_dpo: SOTA preference tuning
+      prm: OpenAI o1 / DeepSeek-R1 (MCTS)
+      simpo: Lightweight alignment
+      orpo: Efficiency-focused models
